@@ -168,6 +168,12 @@ SESSION_CONFIGS = [
         'num_demo_participants': 1,
         'app_sequence': ['quiz'],
     },
+    {	
+        'name': 'triangle',
+        'display_name': "Triangle",
+        'num_demo_participants': 1,
+        'app_sequence': ['triangle'],
+    },
     {
         'name': 'prisoner',
         'display_name': "Prisoner's Dilemma",

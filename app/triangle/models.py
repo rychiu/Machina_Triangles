@@ -8,21 +8,22 @@ author = 'Your name here'
 
 doc = """
 A quiz app that reads its questions from a spreadsheet
-(see quiz.csv in this directory).
-There is 1 question per page; the number of pages in the game
-is determined by the number of questions in the CSV.
+(see triangle.csv in this directory).
+There is 1 set of payoffs withing the triangle per page;
+the number of pages in the game
+is determined by the number of payoff sets in the CSV.
 See the comment below about how to randomize the order of pages.
 """
 
 
 class Constants(BaseConstants):
-    name_in_url = 'quiz'
+    name_in_url = 'triangle'
     players_per_group = None
 
-    with open('quiz/quiz.csv') as f:
-        questions = list(csv.DictReader(f))
+    with open('triangle/triangle.csv') as f:
+        payoff_set = list(csv.DictReader(f))
 
-    num_rounds = len(questions)
+    num_rounds = len(payoff_set)
 
 
 class Subsession(BaseSubsession):
@@ -43,8 +44,8 @@ class Subsession(BaseSubsession):
         for p in self.get_players():
             question_data = p.current_question()
             p.question_id = question_data['id']
-            p.question = question_data['question']
-            p.solution = question_data['solution']
+            p.question = question_data['payoff_set']
+            #p.triangle = get_triangle(question_data)
 
 
 class Group(BaseGroup):
@@ -54,12 +55,11 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     question_id = models.PositiveIntegerField()
     question = models.CharField()
-    solution = models.CharField()
     submitted_answer = models.CharField(widget=widgets.RadioSelect())
-    is_correct = models.BooleanField()
+    #is_correct = models.BooleanField()
 
     def current_question(self):
         return self.session.vars['questions'][self.round_number - 1]
 
     def check_correct(self):
-        self.is_correct = self.submitted_answer == self.solution
+        self.preference = self.submitted_answer
