@@ -1,0 +1,4 @@
+id,payoffset,option1,option2,A_p1,A_p3,B_p1,B_p3
+1,Set 1,A,B,1/3,1/3,1/2,1/2
+2,Set 1,A,B,,,,
+3,Set 1,A,B,,,,
