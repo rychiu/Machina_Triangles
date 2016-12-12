@@ -29,13 +29,13 @@ class Constants(BaseConstants):
 class Subsession(BaseSubsession):
     def before_session_starts(self):
         if self.round_number == 1:
-            self.session.vars['questions'] = Constants.questions
+            self.session.vars['questions'] = Constants.payoff_set
        
 
         for p in self.get_players():
             question_data = p.current_question()
             p.question_id = question_data['id']
-            p.question = question_data['payoff_set']
+            p.question = question_data['payoffset']
 
 
 
