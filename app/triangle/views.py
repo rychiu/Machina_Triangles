@@ -16,7 +16,7 @@ class Question(Page):
         ]
 
     def before_next_page(self):
-        # self.player.check_correct()
+       
         pass
 
 
@@ -28,7 +28,7 @@ class Results(Page):
         player_in_all_rounds = self.player.in_all_rounds()
         return {
             'player_in_all_rounds': player_in_all_rounds,
-            # 'questions_correct': sum([p.is_correct for p in player_in_all_rounds])
+           
         }
 
 

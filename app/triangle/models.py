@@ -30,22 +30,13 @@ class Subsession(BaseSubsession):
     def before_session_starts(self):
         if self.round_number == 1:
             self.session.vars['questions'] = Constants.questions
-            ## ALTERNATIVE DESIGN:
-            ## to randomize the order of the questions, you could instead do:
-
-            # import random
-            # randomized_questions = random.sample(Constants.questions, len(Constants.questions))
-            # self.session.vars['questions'] = randomized_questions
-
-            ## and to randomize differently for each participant, you could use
-            ## the random.sample technique, but assign into participant.vars
-            ## instead of session.vars.
+       
 
         for p in self.get_players():
             question_data = p.current_question()
             p.question_id = question_data['id']
             p.question = question_data['payoff_set']
-            #p.triangle = get_triangle(question_data)
+
 
 
 class Group(BaseGroup):
@@ -61,5 +52,4 @@ class Player(BasePlayer):
     def current_question(self):
         return self.session.vars['questions'][self.round_number - 1]
 
-    def check_correct(self):
-        self.preference = self.submitted_answer
+
