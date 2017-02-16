@@ -47,7 +47,7 @@ class Player(BasePlayer):
     question_id = models.PositiveIntegerField()
     question = models.CharField()
     submitted_answer = models.CharField(widget=widgets.RadioSelect())
-    #is_correct = models.BooleanField()
+
 
     def current_question(self):
         return self.session.vars['questions'][self.round_number - 1]
