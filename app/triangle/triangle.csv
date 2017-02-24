@@ -1,4 +1,4 @@
-id,payoffset,option1,option2,A_p1,A_p3,B_p1,B_p3
-1,"For Set 1, which point would you prefer?","50% chance of p1, 0% chance of p2, and 50% chance of p3","33% chance of p1, 33% chance of p2, and 33% chance of p3",0.5,0.5,0.333,0.333
-2,"For Set 2, which point would you prefer?","0% chance of p1, 50% chance of p2, and 50% chance of p3","25% chance of p1, 0% chance of p2, and 75% chance of p3",0,0.5,0.25,0.75
-3,"For Set 3, which point would you prefer?","50% chance of p1, 50% chance of p2, and 0% chance of p3","75% chance of p1, 0% chance of p2, and 25% chance of p3",0.5,0,0.75,0.25
+id,payoffset,option1,option2,A_p1,A_p3,B_p1,B_p3,payoff1,payoff2,payoff3
+1,"For Set 1, which point would you prefer?","50% chance of p1, 0% chance of p2, and 50% chance of p3","33% chance of p1, 33% chance of p2, and 33% chance of p3",0.5,0.5,0.333,0.333,$0 ,$5 ,$10 
+2,"For Set 2, which point would you prefer?","0% chance of p1, 50% chance of p2, and 50% chance of p3","25% chance of p1, 0% chance of p2, and 75% chance of p3",0,0.5,0.25,0.75,$0 ,$5 ,$10 
+3,"For Set 3, which point would you prefer?","50% chance of p1, 50% chance of p2, and 0% chance of p3","75% chance of p1, 0% chance of p2, and 25% chance of p3",0.5,0,0.75,0.25,$0 ,$5 ,$10 

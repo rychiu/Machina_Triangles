@@ -12,7 +12,7 @@ class Question(Page):
         qd = self.player.current_question()
         return [
             qd['option1'],
-            qd['option2'],
+            qd['option2'], #A_p1a + "chance of " + payoff1, ", " + 
         ]
 
     def before_next_page(self):
