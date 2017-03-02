@@ -13,8 +13,8 @@ class Question(Page):
     def submitted_answer_choices(self):
         qd = self.player.current_question()
         return [
-            qd['option1'],
-            qd['option2'], 
+           qd['a_p1']+"%"+" chance of "+qd['payoff1']+", "+qd['a_p2']+"%"+" chance of "+qd['payoff2']+", or "+qd['a_p3']+"%"+" chance of "+qd['payoff3'],
+           qd['b_p1']+"%"+" chance of "+qd['payoff1']+", "+qd['b_p2']+"%"+" chance of "+qd['payoff2']+", or "+qd['b_p3']+"%"+" chance of "+qd['payoff3'],
         ]
 
     def vars_for_template(self):
