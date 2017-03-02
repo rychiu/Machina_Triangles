@@ -8,52 +8,11 @@
 
 {% block scripts %}
     <script src="https://code.highcharts.com/highcharts.js">
-    	
-    	Highcharts.chart('container', {
-  xAxis: {
-    min: 0,
-    max: 1,
-    lineWidth: 2
-  },
-  yAxis: {
-    min: 0,
-    max: 1,
-    lineWidth: 2
-
-  },
-  title: {
-    text: ''
-  },
-  series: [{
-    type: 'line',
-    name: 'Line',
-    data: [
-      [0, 1],
-      [1, 0]
-    ],
-    marker: {
-      enabled: false
-    },
-    states: {
-      hover: {
-        lineWidth: 0
-      }
-    },
-    enableMouseTracking: false
-  }, {
-    type: 'scatter',
-    name: 'Points',
-    data: [.5],
-    marker: {
-      radius: 4
-    }
-  }]
-});
-
-    	
+      
+     
+      
     </script>
-
-
+    <script src="http://code.highcharts.com/modules/data.js"></script>
 
 {% endblock %}
 
@@ -65,8 +24,8 @@
 	<div id="container" style="width: 300px; height: 300px; margin: 0">	</div>
 	 <script language="JavaScript" >
     	
-    	$(function(){
-    		$('#container').highcharts({
+    	$(function () {
+    	   	$('#container').highcharts({
     			chart:{
     				renderTo: 'container',
     			},
@@ -117,7 +76,7 @@
   			}, {
       		type: 'scatter',
       		name: ' ',
-      		data: [[0.5,0], [0.333, 0.333]],
+      		data: {{series}} ,
       		marker: {
           		radius: 4
       		},
@@ -125,6 +84,7 @@
   }]
 });
 });
+
 
     	
     </script>

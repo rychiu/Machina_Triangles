@@ -1,7 +1,9 @@
 from otree.api import Currency as c, currency_range
+from otree.api import safe_json
 from . import models
 from ._builtin import Page, WaitPage
 from .models import Constants
+
 
 
 class Question(Page):
@@ -12,8 +14,27 @@ class Question(Page):
         qd = self.player.current_question()
         return [
             qd['option1'],
-            qd['option2'], #A_p1a + "chance of " + payoff1, ", " + 
+            qd['option2'], 
         ]
+
+    def vars_for_template(self):
+        points = []
+        points2 = []
+        qd = self.player.current_question()
+
+        points.append(float(qd['A_p1']))
+        points.append(float(qd['A_p3']))
+        points2.append(points)
+
+        points = []
+        points.append(float(qd['B_p1']))
+        points.append(float(qd['B_p3']))
+        points2.append(points)
+
+        points2 = safe_json(points2)
+        return{
+            'series' : points2,
+        }
 
     def before_next_page(self):
        

@@ -27,6 +27,8 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
+
+
     def before_session_starts(self):
         if self.round_number == 1:
             self.session.vars['questions'] = Constants.payoff_set
