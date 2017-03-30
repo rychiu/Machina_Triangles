@@ -25,8 +25,8 @@ class Question(Page):
 
         #Returns dynamic text options for A and B
         return [
-           str(a_p1)+"%"+" chance of "+qd['payoff1']+", "+str(a_p2)+"%"+" chance of "+qd['payoff2']+", or "+str(a_p3)+"%"+" chance of "+qd['payoff3'],
-           str(b_p1)+"%"+" chance of "+qd['payoff1']+", "+str(b_p2)+"%"+" chance of "+qd['payoff2']+", or "+str(b_p3)+"%"+" chance of "+qd['payoff3'],
+           "A: "+str(a_p1)+"%"+" chance of $"+qd['payoff1']+", "+str(a_p2)+"%"+" chance of $"+qd['payoff2']+", or "+str(a_p3)+"%"+" chance of $"+qd['payoff3'],
+           "B: "+str(b_p1)+"%"+" chance of $"+qd['payoff1']+", "+str(b_p2)+"%"+" chance of $"+qd['payoff2']+", or "+str(b_p3)+"%"+" chance of $"+qd['payoff3'],
         ]
 
     #Creates data series that is passed to imbeded highchart triangle
@@ -36,7 +36,8 @@ class Question(Page):
         pointA = []
         pointB = []
         #Array to hold 2 sets of points
-        points = []
+        pointsA = []
+        pointsB = []
         qd = self.player.current_question()
 
         #Adding points for set A
@@ -48,16 +49,18 @@ class Question(Page):
         pointB.append(float(qd['B_p3']))
 
         #Adding A and B to points
-        points.append(pointA)
-        points.append(pointB)
+        pointsA.append(pointA)
+        pointsB.append(pointB)
 
         #This line is needed for the data to be passed to highcharts
         #Without it the data is in the wrong form and will crash program
-        points = safe_json(points)
+        pointsA = safe_json(pointsA)
+        pointsB = safe_json(pointsB)
 
         #Returns [[a1,a2],[b1,b2]] as a series
         return{
-            'series' : points,
+            'seriesA' : pointsA,
+            'seriesB' : pointsB,
         }
 
     def before_next_page(self):

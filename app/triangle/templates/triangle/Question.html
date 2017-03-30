@@ -40,6 +40,11 @@
             labels: {
                 enabled: false
             }
+            title:{
+                align: 'high',
+                text: '$10', //need to make this dynamic
+                rotation: 360
+            }
         },
         yAxis: {
             min: 0,
@@ -51,7 +56,9 @@
                 enabled: false
             },
             title:{
-                text:' '
+                align: 'high',
+                text:'$10', //need to make this dynamic
+                rotation: 360
              }
        },
        title: {
@@ -82,12 +89,21 @@
     // Points for probabilities. 'data' pulls in the csv file for the different options of the game.
     //Series created in views.py
           type: 'scatter',
-          name: ' ',
-          data: {{series}} ,
+          name: 'A', 
+          data: {{seriesA}} ,
           marker: {
               radius: 4
           },
-      showInLegend: false
+          showInLegend: false
+        },
+          {
+            type: 'scatter',
+            name: 'B',
+            data: {{seriesB}} ,
+            marker: {
+                radius: 4
+            },
+      showInLegend: false 
   }]
 });
 });
