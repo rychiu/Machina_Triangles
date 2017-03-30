@@ -41,6 +41,7 @@ class Subsession(BaseSubsession):
         for p in self.get_players():
             question_data = p.current_question()
             p.question_id = question_data['id']
+            p.shape = random.choice(['pie','tri'])
             p.question = "For Set " + str(question_data['id']) + " , which point would you prefer?" 
 
 #Defines how groups opterate
@@ -51,6 +52,7 @@ class Group(BaseGroup):
 
 #Defines attributes for each player
 class Player(BasePlayer):
+    shape = models.CharField()
     question_id = models.PositiveIntegerField()
     question = models.CharField()
     submitted_answer = models.CharField(widget=widgets.RadioSelect())

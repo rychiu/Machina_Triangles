@@ -144,6 +144,14 @@ SESSION_CONFIGS = [
         'display_name': "Triangle",
         'num_demo_participants': 1,
         'app_sequence': ['triangle'],
+        'treatment':'pie',
+    },
+    {   
+        'name': 'triangle',
+        'display_name': "Triangle",
+        'num_demo_participants': 1,
+        'app_sequence': ['triangle'],
+        'treatment':'tri',
     },
    
 
