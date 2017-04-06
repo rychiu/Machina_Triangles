@@ -63,9 +63,57 @@ class Question(Page):
             'seriesB' : pointsB,
         }
 
-    def before_next_page(self):
-       
-        pass
+    def is_displayed(self):
+        return self.player.treat == 'tri'
+
+
+class Question_pie(Page):
+    form_model = models.Player
+    form_fields = ['submitted_answer']
+
+    #Creates text for answer options
+    def submitted_answer_choices(self):
+        qd = self.player.current_question()
+        #Numbers for Option A
+        a_p1 = int(100*float(qd['A_p1']))
+        a_p3 = int(100*float(qd['A_p3']))
+        a_p2 = int(100 - a_p1 - a_p3)
+        
+        #Numbers for Option B
+        b_p1 = int(100*float(qd['B_p1']))
+        b_p3 = int(100*float(qd['B_p3']))
+        b_p2 = int(100 - a_p1 - a_p3)
+
+        #Returns dynamic text options for A and B
+        return [
+           "A: "+str(a_p1)+"%"+" chance of $"+qd['payoff1']+", "+str(a_p2)+"%"+" chance of $"+qd['payoff2']+", or "+str(a_p3)+"%"+" chance of $"+qd['payoff3'],
+           "B: "+str(b_p1)+"%"+" chance of $"+qd['payoff1']+", "+str(b_p2)+"%"+" chance of $"+qd['payoff2']+", or "+str(b_p3)+"%"+" chance of $"+qd['payoff3'],
+        ]
+
+    #Creates data series that is passed to imbeded highchart triangle
+    #Data takes form [[a1,a2],[b1,b2]]
+    def vars_for_template(self):
+        qd = self.player.current_question()
+
+        #Returns [[a1,a2],[b1,b2]] as a series
+        return{
+            'ap1' : int(100*float(qd['A_p1'])),
+            'ap2' : int(100*(float(1-float(qd['A_p1'])-float(qd['A_p3'])))),
+            'ap3' : int(100*float(qd['A_p3'])),
+
+            'd1' : "0",
+            'd2' : "5",
+            'd3' : "10",
+
+            'bp1' : int(100*float(qd['B_p1'])),
+            'bp2' : int(100*(float(1-float(qd['B_p1'])-float(qd['B_p3'])))),
+            'bp3' : int(100*float(qd['B_p3'])),
+        }
+
+    def is_displayed(self):
+        return self.player.treat == 'pie'
+
+
 
 #This class sends information to Results.html
 class Results(Page):

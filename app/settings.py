@@ -139,15 +139,21 @@ SESSION_CONFIG_DEFAULTS = {
 
 SESSION_CONFIGS = [
    
-    {	
+    {   
         'name': 'triangle',
+        'display_name': "Triangle",
+        'num_demo_participants': 1,
+        'app_sequence': ['triangle'],
+    },
+    {	
+        'name': 'triangle_pie',
         'display_name': "Triangle",
         'num_demo_participants': 1,
         'app_sequence': ['triangle'],
         'treatment':'pie',
     },
     {   
-        'name': 'triangle',
+        'name': 'triangle_tri',
         'display_name': "Triangle",
         'num_demo_participants': 1,
         'app_sequence': ['triangle'],

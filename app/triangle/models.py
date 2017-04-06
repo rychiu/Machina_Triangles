@@ -41,8 +41,14 @@ class Subsession(BaseSubsession):
         for p in self.get_players():
             question_data = p.current_question()
             p.question_id = question_data['id']
-            p.shape = random.choice(['pie','tri'])
             p.question = "For Set " + str(question_data['id']) + " , which point would you prefer?" 
+            for p in self.get_players():
+                if 'treatment' in self.session.config:
+                    # demo mode
+                    p.treat = self.session.config['treatment']
+                else:
+                    # live experiment mode
+                    p.treat = random.choice(['pie', 'tri'])
 
 #Defines how groups opterate
 #Since we do not have groups, classis not used
@@ -52,10 +58,10 @@ class Group(BaseGroup):
 
 #Defines attributes for each player
 class Player(BasePlayer):
-    shape = models.CharField()
     question_id = models.PositiveIntegerField()
     question = models.CharField()
     submitted_answer = models.CharField(widget=widgets.RadioSelect())
+    treat = models.CharField()
 
 
     def current_question(self):
