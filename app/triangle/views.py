@@ -6,7 +6,7 @@ from .models import Constants
 
 
 #This class sends information to the Questions.html page
-class Question(Page):
+class Question_tri(Page):
     form_model = models.Player
     form_fields = ['submitted_answer']
 
@@ -129,6 +129,7 @@ class Results(Page):
 
 #Order in which pages are displayed
 page_sequence = [
-    Question,
+    Question_tri,
+    Question_pie,
     Results
 ]

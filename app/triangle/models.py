@@ -3,6 +3,7 @@ from otree.api import (
     Currency as c, currency_range
 )
 import csv
+import random
 
 author = 'Your name here'
 
