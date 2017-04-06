@@ -101,9 +101,9 @@ class Question_pie(Page):
             'ap2' : int(100*(float(1-float(qd['A_p1'])-float(qd['A_p3'])))),
             'ap3' : int(100*float(qd['A_p3'])),
 
-            'd1' : "0",
-            'd2' : "5",
-            'd3' : "10",
+            'd1' : str(qd['payoff1']),
+            'd2' : str(qd['payoff2']),
+            'd3' : str(qd['payoff3']),
 
             'bp1' : int(100*float(qd['B_p1'])),
             'bp2' : int(100*(float(1-float(qd['B_p1'])-float(qd['B_p3'])))),
