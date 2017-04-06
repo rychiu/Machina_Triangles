@@ -1,0 +1,122 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+{% load staticfiles %}
+
+{% block title %}
+    Question {{ player.round_number }} of {{ Constants.num_rounds }}
+{% endblock %}
+
+{% block scripts %}
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+{% endblock %}
+
+{% block content %}
+	
+	You are given a bet where you have some probability, p1 of getting $0, p2 of getting $5, and p3 of getting $10. 
+    <div>
+
+      <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+      <div id="container2" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+
+    </div>
+
+    	 <script language="JavaScript" >
+        	
+        $(function () {
+          $('#container').highcharts({
+          chart: {
+              plotBackgroundColor: null,
+              plotBorderWidth: null,
+              plotShadow: false,
+              type: 'pie'
+          },
+          title: {
+              text: 'Option A'
+          },
+          tooltip: {
+              pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+          },
+          plotOptions: {
+              pie: {
+                  allowPointSelect: true,
+                  cursor: 'pointer',
+                  dataLabels: {
+                      enabled: true,
+                      format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                      style: {
+                          color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                      }
+                  }
+              }
+          },
+        series: [{
+            name: 'Probability',
+            colorByPoint: true,
+            data: [{
+                name: "$"+{{d1}},
+                y: {{ap1}},
+            }, {
+                name: "$"+{{d2}},
+                y: {{ap2}},
+            }, {
+                name: "$"+{{d3}},
+                y: {{ap3}},
+            }]
+        }]
+    });
+    }); 
+        $(function () {
+          $('#container2').highcharts({
+          chart: {
+              plotBackgroundColor: null,
+              plotBorderWidth: null,
+              plotShadow: false,
+              type: 'pie'
+          },
+          title: {
+              text: 'Option B'
+          },
+          tooltip: {
+              pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+          },
+          plotOptions: {
+              pie: {
+                  allowPointSelect: true,
+                  cursor: 'pointer',
+                  dataLabels: {
+                      enabled: true,
+                      format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                      style: {
+                          color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                      }
+                  }
+              }
+          },
+        series: [{
+            name: 'Probability',
+            colorByPoint: true,
+            data: [{
+                name: "$"+{{d1}},
+                y: {{bp1}},
+            }, {
+                name: "$"+{{d2}},
+                y: {{bp2}},
+            }, {
+                name: "$"+{{d3}},
+                y: {{bp3}},
+            }]
+        }]
+    });
+    });
+
+    	
+    </script>
+
+    {% formfield player.submitted_answer with label=player.question %}
+
+    {% next_button %}
+
+{% endblock %}

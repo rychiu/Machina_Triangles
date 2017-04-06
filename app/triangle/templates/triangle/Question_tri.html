@@ -1,0 +1,121 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+{% load staticfiles %}
+
+{% block title %}
+    Question {{ player.round_number }} of {{ Constants.num_rounds }}
+{% endblock %}
+
+{% block scripts %}
+  <!-- These are imports that are needed for highcharts to run-->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/data.js"></script>
+
+{% endblock %}
+
+{% block content %}
+
+ <!-- Game prompt -->
+  You are given a bet where you have some probability, p1 of getting $5, p2 of getting $10, and p3 of getting $15. 
+
+ <!-- Dimensions for triangle image -->
+  <div id="container" style="width: 300px; height: 300px; margin: 0"> </div>
+   <script language="JavaScript" >
+
+
+    // Triangle design made from highcharts   
+      $(function () {
+          $('#container').highcharts({
+          chart:{
+            renderTo: 'container',
+          },
+      
+      // xAxis and yAxis are the two legs of the triangle
+      xAxis: {
+            min: 0,
+            max: 1,
+            lineWidth: 2,
+            lineColor: 'black',
+            tickColor: 'white',
+            labels: {
+                enabled: false
+            },
+            title:{
+                align: 'high',
+                text: '$10', //need to make this dynamic
+                rotation: 360
+            }
+        },
+        yAxis: {
+            min: 0,
+            max: 1,
+            lineWidth: 2,
+            lineColor: 'black',
+            gridLineColor: 'white',
+            labels: {
+                enabled: false
+            },
+            title:{
+                align: 'high',
+                text:'$10', //need to make this dynamic
+                rotation: 360
+             }
+       },
+       title: {
+            text: ""
+        },
+      
+      // Hypotenuse of the triangle
+      series: [{
+          type: 'line',
+            showInLegend: false,
+            name: ' ',
+            data: [[1, 0], [0, 1]],
+            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
+                  marker: {enabled: false} ,
+              plotLines: [{
+                color: '#FF0000 ',
+                width: 2,
+                value: 10, }
+          ],
+            states: {
+                hover: {
+                    lineWidth: 0
+                }
+            },
+            enableMouseTracking: false
+        }, {
+    
+    // Points for probabilities. 'data' pulls in the csv file for the different options of the game.
+    //Series created in views.py
+          type: 'scatter',
+          name: 'A', 
+          data: {{seriesA}} ,
+          marker: {
+                width: 10,
+                height: 10,
+              symbol: 'url(https://www.highcharts.com/samples/graphics/earth.svg)',
+          },
+          showInLegend: false
+        },
+          {
+            type: 'scatter',
+            name: 'B',
+            data: {{seriesB}} ,
+            marker: {
+                width: 10,
+                height: 10,
+                symbol:  'url(https://www.highcharts.com/samples/graphics/earth.svg)',
+            },
+      showInLegend: false 
+  }]
+});
+});
+
+    </script>
+
+    {% formfield player.submitted_answer with label=player.question %}
+
+    {% next_button %}
+
+{% endblock %}
