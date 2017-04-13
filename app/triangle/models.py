@@ -43,12 +43,15 @@ class Subsession(BaseSubsession):
             question_data = p.current_question()
             p.question_id = question_data['id']
             p.question = "For Set " + str(question_data['id']) + " , which point would you prefer?" 
+            #Assigns players to different treatments
             for p in self.get_players():
                 if 'treatment' in self.session.config:
-                    # demo mode
+                    # demo mode 
+                    # Can launch and test either pie or tri
                     p.treat = self.session.config['treatment']
                 else:
                     # live experiment mode
+                    #randomly assigns pie or tri treatment
                     p.treat = random.choice(['pie', 'tri'])
 
 #Defines how groups opterate

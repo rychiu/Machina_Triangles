@@ -138,7 +138,10 @@ SESSION_CONFIG_DEFAULTS = {
 }
 
 SESSION_CONFIGS = [
-   
+   #For our Triangle app, we have three versions
+   #The first one is when it randomly assigns a pie or tri treatment
+   #Second one launches just the pie treatment
+   #Third one launches just the tri treatment
     {   
         'name': 'triangle',
         'display_name': "Triangle",

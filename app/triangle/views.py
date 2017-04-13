@@ -5,7 +5,7 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
-#This class sends information to the Questions.html page
+#This class sends information to the Questions_tri.html page
 class Question_tri(Page):
     form_model = models.Player
     form_fields = ['submitted_answer']
@@ -62,11 +62,11 @@ class Question_tri(Page):
             'seriesA' : pointsA,
             'seriesB' : pointsB,
         }
-
+    # If treatment is tri, display q_tri html
     def is_displayed(self):
         return self.player.treat == 'tri'
 
-
+#This class sends information to the Questions_pie.html page
 class Question_pie(Page):
     form_model = models.Player
     form_fields = ['submitted_answer']
@@ -90,12 +90,10 @@ class Question_pie(Page):
            "B: "+str(b_p1)+"%"+" chance of $"+qd['payoff1']+", "+str(b_p2)+"%"+" chance of $"+qd['payoff2']+", or "+str(b_p3)+"%"+" chance of $"+qd['payoff3'],
         ]
 
-    #Creates data series that is passed to imbeded highchart triangle
-    #Data takes form [[a1,a2],[b1,b2]]
+    #Creates data series that is passed to imbeded highchart piechart
     def vars_for_template(self):
         qd = self.player.current_question()
 
-        #Returns [[a1,a2],[b1,b2]] as a series
         return{
             'ap1' : int(100*float(qd['A_p1'])),
             'ap2' : int(100*(float(1-float(qd['A_p1'])-float(qd['A_p3'])))),
@@ -109,7 +107,7 @@ class Question_pie(Page):
             'bp2' : int(100*(float(1-float(qd['B_p1'])-float(qd['B_p3'])))),
             'bp3' : int(100*float(qd['B_p3'])),
         }
-
+    #Displays q_pie html if treatment is pie
     def is_displayed(self):
         return self.player.treat == 'pie'
 
