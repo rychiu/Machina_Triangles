@@ -16,20 +16,20 @@
 {% block content %}
 
  <!-- Game prompt -->
-  You are given a bet where you have some probability, p1 of getting $5, p2 of getting $10, and p3 of getting $15. 
+  You are given a bet where you have some probability, p1 of getting $5, p2 of getting $10, and p3 of getting $15.
 
  <!-- Dimensions for triangle image -->
   <div id="container" style="width: 300px; height: 300px; margin: 0"> </div>
    <script language="JavaScript" >
 
 
-    // Triangle design made from highcharts   
+    // Triangle design made from highcharts
       $(function () {
           $('#container').highcharts({
           chart:{
             renderTo: 'container',
           },
-      
+
       // xAxis and yAxis are the two legs of the triangle
       xAxis: {
             min: 0,
@@ -42,7 +42,7 @@
             },
             title:{
                 align: 'high',
-                text: '$10', //need to make this dynamic
+                text: {{payofflab1}}
                 rotation: 360
             }
         },
@@ -57,14 +57,14 @@
             },
             title:{
                 align: 'high',
-                text:'$10', //need to make this dynamic
+                text:{{payofflab3}}
                 rotation: 360
              }
        },
        title: {
             text: ""
         },
-      
+
       // Hypotenuse of the triangle
       series: [{
           type: 'line',
@@ -85,11 +85,11 @@
             },
             enableMouseTracking: false
         }, {
-    
+
     // Points for probabilities. 'data' pulls in the csv file for the different options of the game.
     //Series created in views.py
           type: 'scatter',
-          name: 'A', 
+          name: 'A',
           data: {{seriesA}} ,
           marker: {
                 width: 10,
@@ -107,7 +107,7 @@
                 height: 10,
                 symbol:  'url(https://www.highcharts.com/samples/graphics/earth.svg)',
             },
-      showInLegend: false 
+      showInLegend: false
   }]
 });
 });

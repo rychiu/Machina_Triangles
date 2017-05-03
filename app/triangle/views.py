@@ -5,6 +5,12 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
+class Info_tri(Page):
+    # If treatment is tri, display info_tri html
+    def is_displayed(self):
+        return self.player.treat == 'tri'
+
+
 #This class sends information to the Questions_tri.html page
 class Question_tri(Page):
     form_model = models.Player
@@ -17,7 +23,7 @@ class Question_tri(Page):
         a_p1 = int(100*float(qd['A_p1']))
         a_p3 = int(100*float(qd['A_p3']))
         a_p2 = int(100 - a_p1 - a_p3)
-        
+
         #Numbers for Option B
         b_p1 = int(100*float(qd['B_p1']))
         b_p3 = int(100*float(qd['B_p3']))
@@ -56,15 +62,26 @@ class Question_tri(Page):
         #Without it the data is in the wrong form and will crash program
         pointsA = safe_json(pointsA)
         pointsB = safe_json(pointsB)
+        payofflab1 = "$" + qd['payoff1']
+        payofflab3 = "$" + qd['payoff3']
 
         #Returns [[a1,a2],[b1,b2]] as a series
         return{
             'seriesA' : pointsA,
             'seriesB' : pointsB,
+            'poffA' : payofflab1,
+            'poffC' : payofflab3,
         }
     # If treatment is tri, display q_tri html
     def is_displayed(self):
         return self.player.treat == 'tri'
+
+
+
+class Info_pie(Page):
+    # If treatment is pie, display info_pie html
+    def is_displayed(self):
+        return self.player.treat == 'pie'
 
 #This class sends information to the Questions_pie.html page
 class Question_pie(Page):
@@ -78,7 +95,7 @@ class Question_pie(Page):
         a_p1 = int(100*float(qd['A_p1']))
         a_p3 = int(100*float(qd['A_p3']))
         a_p2 = int(100 - a_p1 - a_p3)
-        
+
         #Numbers for Option B
         b_p1 = int(100*float(qd['B_p1']))
         b_p3 = int(100*float(qd['B_p3']))
@@ -112,6 +129,46 @@ class Question_pie(Page):
         return self.player.treat == 'pie'
 
 
+class Info_base(Page):
+    # If treatment is base, display info_base html
+    def is_displayed(self):
+        return self.player.treat == 'base'
+
+#This class sends information to the Questions_base.html page
+class Question_base(Page):
+    form_model = models.Player
+    form_fields = ['submitted_answer']
+
+    #Creates text for answer options
+    def submitted_answer_choices(self):
+        qd = self.player.current_question()
+        #Numbers for Option A
+        a_p1 = int(100*float(qd['A_p1']))
+        a_p3 = int(100*float(qd['A_p3']))
+        a_p2 = int(100 - a_p1 - a_p3)
+
+        #Numbers for Option B
+        b_p1 = int(100*float(qd['B_p1']))
+        b_p3 = int(100*float(qd['B_p3']))
+        b_p2 = int(100 - a_p1 - a_p3)
+
+        #Returns dynamic text options for A and B
+        return [
+           "A: "+str(a_p1)+"%"+" chance of $"+qd['payoff1']+", "+str(a_p2)+"%"+" chance of $"+qd['payoff2']+", or "+str(a_p3)+"%"+" chance of $"+qd['payoff3'],
+           "B: "+str(b_p1)+"%"+" chance of $"+qd['payoff1']+", "+str(b_p2)+"%"+" chance of $"+qd['payoff2']+", or "+str(b_p3)+"%"+" chance of $"+qd['payoff3'],
+        ]
+
+    #Creates data series that is passed to imbeded highchart piechart
+    def vars_for_template(self):
+        qd = self.player.current_question()
+
+        return{
+
+        }
+    #Displays q_pie html if treatment is base
+    def is_displayed(self):
+        return self.player.treat == 'base'
+
 
 #This class sends information to Results.html
 class Results(Page):
@@ -122,11 +179,15 @@ class Results(Page):
         player_in_all_rounds = self.player.in_all_rounds()
         return {
             'player_in_all_rounds': player_in_all_rounds,
-           
+
         }
 
 #Order in which pages are displayed
 page_sequence = [
+    Info_base,
+    Info_tri,
+    Info_pie,
+    Question_base,
     Question_tri,
     Question_pie,
     Results

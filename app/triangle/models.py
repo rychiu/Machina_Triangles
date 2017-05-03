@@ -37,22 +37,22 @@ class Subsession(BaseSubsession):
     def before_session_starts(self):
         if self.round_number == 1:
             self.session.vars['questions'] = Constants.payoff_set
-       
+
         #Gets current row and then selects columns to extracdt needed data
         for p in self.get_players():
             question_data = p.current_question()
             p.question_id = question_data['id']
-            p.question = "For Set " + str(question_data['id']) + " , which point would you prefer?" 
+            p.question = "For Set " + str(question_data['id']) + " , which point would you prefer?"
             #Assigns players to different treatments
             for p in self.get_players():
                 if 'treatment' in self.session.config:
-                    # demo mode 
+                    # demo mode
                     # Can launch and test either pie or tri
                     p.treat = self.session.config['treatment']
                 else:
                     # live experiment mode
                     #randomly assigns pie or tri treatment
-                    p.treat = random.choice(['pie', 'tri'])
+                    p.treat = random.choice(['pie', 'tri','base'])
 
 #Defines how groups opterate
 #Since we do not have groups, classis not used
@@ -70,5 +70,3 @@ class Player(BasePlayer):
 
     def current_question(self):
         return self.session.vars['questions'][self.round_number - 1]
-
-

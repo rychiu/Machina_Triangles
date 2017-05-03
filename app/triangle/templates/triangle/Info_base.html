@@ -1,0 +1,23 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+{% load staticfiles %}
+
+{% block title %}
+    Instructions
+{% endblock %}
+
+{% block scripts %}
+
+
+{% endblock %}
+
+{% block content %}
+
+ <!-- Game prompt -->
+  You are given a bet where you have some probability, p1 of getting $5, p2 of getting $10, and p3 of getting $15.
+
+    {% formfield player.submitted_answer with label=player.question %}
+
+    {% next_button %}
+
+{% endblock %}

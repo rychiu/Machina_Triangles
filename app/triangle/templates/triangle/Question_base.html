@@ -1,0 +1,25 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+{% load staticfiles %}
+
+{% block title %}
+    Question {{ player.round_number }} of {{ Constants.num_rounds }}
+{% endblock %}
+
+{% block scripts %}
+  <!-- These are imports that are needed for highcharts to run-->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/data.js"></script>
+
+{% endblock %}
+
+{% block content %}
+
+ <!-- Game prompt -->
+  You are given a bet where you have some probability, p1 of getting $5, p2 of getting $10, and p3 of getting $15.
+
+    {% formfield player.submitted_answer with label=player.question %}
+
+    {% next_button %}
+
+{% endblock %}

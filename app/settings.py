@@ -142,27 +142,34 @@ SESSION_CONFIGS = [
    #The first one is when it randomly assigns a pie or tri treatment
    #Second one launches just the pie treatment
    #Third one launches just the tri treatment
-    {   
+    {
         'name': 'triangle',
         'display_name': "Triangle",
         'num_demo_participants': 1,
         'app_sequence': ['triangle'],
     },
-    {	
+    {
         'name': 'triangle_pie',
-        'display_name': "Triangle",
+        'display_name': "Triangle_pie",
         'num_demo_participants': 1,
         'app_sequence': ['triangle'],
         'treatment':'pie',
     },
-    {   
+    {
         'name': 'triangle_tri',
-        'display_name': "Triangle",
+        'display_name': "Triangle_tri",
         'num_demo_participants': 1,
         'app_sequence': ['triangle'],
         'treatment':'tri',
     },
-   
+    {
+        'name': 'triangle_base',
+        'display_name': "Triangle_base",
+        'num_demo_participants': 1,
+        'app_sequence': ['triangle'],
+        'treatment':'base',
+    },
+
 
 ]
 
