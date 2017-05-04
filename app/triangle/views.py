@@ -27,7 +27,7 @@ class Question_tri(Page):
         #Numbers for Option B
         b_p1 = int(100*float(qd['B_p1']))
         b_p3 = int(100*float(qd['B_p3']))
-        b_p2 = int(100 - a_p1 - a_p3)
+        b_p2 = int(100 - b_p1 - b_p3)
 
         #Returns dynamic text options for A and B
         return [
@@ -62,8 +62,8 @@ class Question_tri(Page):
         #Without it the data is in the wrong form and will crash program
         pointsA = safe_json(pointsA)
         pointsB = safe_json(pointsB)
-        payofflab1 = "$" + qd['payoff1']
-        payofflab3 = "$" + qd['payoff3']
+        payofflab1 = "$"+str(qd['payoff1'])
+        payofflab3 = "$"+str(qd['payoff3'])
 
         #Returns [[a1,a2],[b1,b2]] as a series
         return{
@@ -150,7 +150,7 @@ class Question_base(Page):
         #Numbers for Option B
         b_p1 = int(100*float(qd['B_p1']))
         b_p3 = int(100*float(qd['B_p3']))
-        b_p2 = int(100 - a_p1 - a_p3)
+        b_p2 = int(100 - b_p1 - b_p3)
 
         #Returns dynamic text options for A and B
         return [
