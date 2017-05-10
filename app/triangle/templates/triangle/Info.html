@@ -1,0 +1,22 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+{% load staticfiles %}
+
+{% block title %}
+    Instructions
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}
+
+{% block content %}
+<!-- Game prompt -->
+
+You will be given a series of choices, and in each choice you pick one of two options. Each option will have a chance of paying you $0, $5, or $15.
+
+At the end of the session, we will select one of your choices to be the one that counts.
+
+    {% next_button %}
+
+{% endblock %}

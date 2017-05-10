@@ -5,10 +5,10 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
-class Info_tri(Page):
-    # If treatment is tri, display info_tri html
+class Info(Page):
     def is_displayed(self):
-        return self.player.treat == 'tri'
+        return self.round_number==1
+
 
 
 #This class sends information to the Questions_tri.html page
@@ -62,15 +62,15 @@ class Question_tri(Page):
         #Without it the data is in the wrong form and will crash program
         pointsA = safe_json(pointsA)
         pointsB = safe_json(pointsB)
-        payofflab1 = "$"+str(qd['payoff1'])
-        payofflab3 = "$"+str(qd['payoff3'])
+        #payofflab1 = str("\'"+"$"+str(qd['payoff1'])+"\'")
+        #payofflab3 = str("\'"+"$"+str(qd['payoff3'])+"\'")
 
         #Returns [[a1,a2],[b1,b2]] as a series
         return{
             'seriesA' : pointsA,
             'seriesB' : pointsB,
-            'poffA' : payofflab1,
-            'poffC' : payofflab3,
+            #'poffA' : payofflab1,
+            #'poffC' : payofflab3,
         }
     # If treatment is tri, display q_tri html
     def is_displayed(self):
@@ -78,10 +78,6 @@ class Question_tri(Page):
 
 
 
-class Info_pie(Page):
-    # If treatment is pie, display info_pie html
-    def is_displayed(self):
-        return self.player.treat == 'pie'
 
 #This class sends information to the Questions_pie.html page
 class Question_pie(Page):
@@ -129,10 +125,7 @@ class Question_pie(Page):
         return self.player.treat == 'pie'
 
 
-class Info_base(Page):
-    # If treatment is base, display info_base html
-    def is_displayed(self):
-        return self.player.treat == 'base'
+
 
 #This class sends information to the Questions_base.html page
 class Question_base(Page):
@@ -184,9 +177,7 @@ class Results(Page):
 
 #Order in which pages are displayed
 page_sequence = [
-    Info_base,
-    Info_tri,
-    Info_pie,
+    Info,
     Question_base,
     Question_tri,
     Question_pie,
